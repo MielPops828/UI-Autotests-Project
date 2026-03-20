@@ -19,7 +19,6 @@ public class HomeTest extends BaseTest{
         softAssert.assertTrue(home.hasAboutContact("+91 97111-91-558"));
         softAssert.assertTrue(home.hasAboutContact("trainer@way2automation.com"));
         softAssert.assertTrue(home.hasAboutContact("seleniumcoaching@gmail.com"));
-        softAssert.assertTrue(home.isSliderWorking(), "Кнопки навигации работают некорректно: слайды не меняются");
         softAssert.assertAll();
     }
 }

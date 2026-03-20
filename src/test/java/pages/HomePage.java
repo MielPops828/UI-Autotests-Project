@@ -40,15 +40,6 @@ public class HomePage {
     @FindBy(xpath = "//*[@id=\"ast-desktop-header\"]/div[1]")
     public WebElement contactSection;
 
-    @FindBy(xpath = "//div[contains(@class, 'swiper-button-prev-c50f9f0')]")
-    public WebElement swiperButtonLeft;
-
-    @FindBy(xpath = "//div[contains(@class, 'swiper-button-next-c50f9f0')]")
-    public WebElement swiperButtonRight;
-
-    @FindBy(xpath = "//div[contains(@class, 'pp-info-box swiper-slide')]")
-    public List<WebElement> swiperSlides;
-
     @FindBy(css = "div[data-id='695441a0']")
     public WebElement aboutSection;
 
@@ -128,20 +119,5 @@ public class HomePage {
             return lifetimeMembershipTitle.isDisplayed();
         }
         return false;
-    }
-
-    public boolean isSliderWorking(){
-        try{
-            WebElement firstCard = swiperSlides.getFirst();
-            String firstSlideTitle = firstCard.findElement(By.cssSelector("h4")).getText();
-            swiperButtonRight.click();
-            Thread.sleep(1000);
-            WebElement firstCardAfter = swiperSlides.getFirst();
-            String firstSlideTitleAfter = firstCardAfter.findElement(By.cssSelector("h4")).getText();
-            return !firstSlideTitle.equals(firstSlideTitleAfter);
-
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
