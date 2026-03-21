@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -55,10 +56,12 @@ public class HomePage {
     @FindBy(xpath = "//h1[contains(text(), 'LIFETIME MEMBERSHIP CLUB')]")
     public WebElement lifetimeMembershipTitle;
 
+    @Step("Открыть сайт")
     public void openPage(){
         driver.get(ParameterProvider.get("base.url"));
     }
 
+    @Step("Проверить отображение элементов на странице")
     public boolean visibilitySections(){
         wait.until(ExpectedConditions.visibilityOf(headerElement));
         wait.until(ExpectedConditions.visibilityOf(navBlock));
@@ -73,6 +76,7 @@ public class HomePage {
         return contactSection.findElements(By.tagName("a"));
     }
 
+    @Step("Проверить хэдер с контактной информацией")
     public boolean areAllLinksHaveHref() {
         List<WebElement> links = getAllLinks();
         for (WebElement link : links) {
@@ -84,14 +88,17 @@ public class HomePage {
         return true;
     }
 
+    @Step("Проверить отображение футера")
     public boolean footerVisibility(){
         return footerElement.isDisplayed();
     }
 
+    @Step("Проверить, что футер содержит {address}")
     public boolean hasAboutContact(String address){
         return aboutSection.getText().trim().contains(address);
     }
 
+    @Step("Проверить отображение меню при скроллинге страницы вниз")
     public boolean hasHeaderVisible() {
         try{
             js.executeScript("window.scrollTo({top: 2000, behavior: 'smooth'})");
@@ -107,10 +114,12 @@ public class HomePage {
         }
     }
 
+    @Step("Проверить, что произошел переход на {url}")
     public boolean isTransitionUrl(String url){
         return url.equals(driver.getCurrentUrl());
     }
 
+    @Step("Перейти по меню навигации на другую страницу: {url}")
     public boolean hasTransition(String url){
         allCoursesMenu.click();
         lifetimeMembershipLink.click();
