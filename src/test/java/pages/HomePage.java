@@ -57,7 +57,11 @@ public class HomePage {
     public WebElement lifetimeMembershipTitle;
 
     @Step("Открыть сайт")
+<<<<<<< Updated upstream
     public void openPage(){
+=======
+    public HomePage openPage(){
+>>>>>>> Stashed changes
         driver.get(ParameterProvider.get("base.url"));
     }
 
@@ -98,6 +102,7 @@ public class HomePage {
         return aboutSection.getText().trim().contains(address);
     }
 
+<<<<<<< Updated upstream
     @Step("Проверить отображение меню при скроллинге страницы вниз")
     public boolean hasHeaderVisible() {
         try{
@@ -128,5 +133,30 @@ public class HomePage {
             return lifetimeMembershipTitle.isDisplayed();
         }
         return false;
+=======
+    @Step("Проскроллить страницу вниз")
+    public HomePage scrollDown(int value) {
+        js.executeScript("window.scrollTo({top: " + value + ", behavior: 'smooth'})");
+        wait.until(ExpectedConditions.visibilityOf(headerScroll));
+        return this;
+    }
+
+    @Step("Проверить отображение меню")
+    public boolean isHeaderVisible(){
+        return headerScroll.isDisplayed();
+    }
+
+    @Step("Перейти по меню навигации на другую страницу: {url}")
+    public HomePage navigateTransition(){
+        allCoursesMenu.click();
+        lifetimeMembershipLink.click();
+        wait.until(ExpectedConditions.visibilityOf(lifetimeMembershipTitle));
+        return this;
+    }
+
+    @Step("Проверить, что произошел переход на {url}")
+    public boolean hasTransition(String url){
+        return url.equals(driver.getCurrentUrl()) && lifetimeMembershipTitle.isDisplayed();
+>>>>>>> Stashed changes
     }
 }
