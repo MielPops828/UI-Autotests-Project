@@ -1,12 +1,17 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import utils.ParameterProvider;
 
+@Epic("Автоматизация страницы Way2Automation")
+@Feature("Главная страница")
+@Story("Проверка работы главной страницы")
 public class HomePageLoadTest extends BaseTest{
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void testHomePageLoad() {
         SoftAssert softAssert = new SoftAssert();
         HomePage home = new HomePage(getDriver()).openPage();
