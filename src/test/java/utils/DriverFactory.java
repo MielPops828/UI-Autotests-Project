@@ -22,7 +22,7 @@ public class DriverFactory {
                 WebDriverManager.edgedriver().setup();
                 yield new EdgeDriver();
             }
-            default -> throw new RuntimeException("Browser not supported: " + browser);
+            default -> throw new IllegalArgumentException("Browser not supported: " + browser);
         };
     }
 }

@@ -1,7 +1,6 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utils.ParameterProvider;
@@ -15,7 +14,6 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(){
         driver = createWebdriver(ParameterProvider.get("base.browser"));
-        driver.get(ParameterProvider.get("base.url"));
     }
 
     @AfterMethod

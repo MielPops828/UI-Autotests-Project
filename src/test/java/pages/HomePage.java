@@ -18,45 +18,43 @@ public class HomePage {
     public HomePage(WebDriver driver){
         this.driver = driver;
         js = (JavascriptExecutor) this.driver;
-        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(2));
         PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//*[@id=\"ast-desktop-header\"]/div[1]")
-    public WebElement headerElement;
+    private WebElement headerElement;
 
     @FindBy(xpath = "//*[@id=\"ast-desktop-header\"]/div[2]")
-    public WebElement navBlock;
+    private WebElement navBlock;
 
     @FindBy(xpath = "//a[contains(text(), 'Register Now')]")
-    public WebElement regButton;
+    private WebElement regButton;
 
     @FindBy(css = "section[data-id='5b4952c1']")
-    public WebElement listCourses;
+    private WebElement listCourses;
 
     @FindBy(css = "[data-elementor-type='footer']")
-    public WebElement footerElement;
-
-    @FindBy(xpath = "//*[@id=\"ast-desktop-header\"]/div[1]")
-    public WebElement contactSection;
+    private WebElement footerElement;
 
     @FindBy(css = "div[data-id='695441a0']")
-    public WebElement aboutSection;
+    private WebElement aboutSection;
 
     @FindBy(css = "div.ast-main-header-wrap div.ast-primary-header-bar")
-    public WebElement headerScroll;
+    private WebElement headerScroll;
 
     @FindBy(xpath = "//span[contains(text(), 'All Courses')]")
-    public WebElement allCoursesMenu;
+    private WebElement allCoursesMenu;
 
     @FindBy(xpath = "//span[contains(text(), 'Lifetime Membership')]")
-    public WebElement lifetimeMembershipLink;
+    private WebElement lifetimeMembershipLink;
 
     @FindBy(xpath = "//h1[contains(text(), 'LIFETIME MEMBERSHIP CLUB')]")
-    public WebElement lifetimeMembershipTitle;
+    private WebElement lifetimeMembershipTitle;
 
-    public void openPage(){
+    public HomePage openPage(){
         driver.get(ParameterProvider.get("base.url"));
+        return this;
     }
 
     public boolean visibilitySections(){
@@ -70,7 +68,7 @@ public class HomePage {
     }
 
     public List<WebElement> getAllLinks() {
-        return contactSection.findElements(By.tagName("a"));
+        return headerElement.findElements(By.tagName("a"));
     }
 
     public boolean areAllLinksHaveHref() {
@@ -92,32 +90,23 @@ public class HomePage {
         return aboutSection.getText().trim().contains(address);
     }
 
-    public boolean hasHeaderVisible() {
-        try{
-            js.executeScript("window.scrollTo({top: 2000, behavior: 'smooth'})");
-            Thread.sleep(1000);
-            if (headerScroll.isDisplayed()){
-                js.executeScript("window.scrollTo({down: 2000, behavior: 'smooth'})");
-                Thread.sleep(1000);
-                return true;
-            }
-            return false;
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public HomePage scrollDown(int value) {
+        js.executeScript("window.scrollTo({top: " + value + ", behavior: 'smooth'})");
+        wait.until(ExpectedConditions.visibilityOf(headerScroll));
+        return this;
     }
 
-    public boolean isTransitionUrl(String url){
-        return url.equals(driver.getCurrentUrl());
+    public boolean isHeaderVisible(){
+        return headerScroll.isDisplayed();
     }
 
-    public boolean hasTransition(String url){
+    public HomePage navigateTransition(){
         allCoursesMenu.click();
         lifetimeMembershipLink.click();
         wait.until(ExpectedConditions.visibilityOf(lifetimeMembershipTitle));
-        if (isTransitionUrl(url)){
-            return lifetimeMembershipTitle.isDisplayed();
-        }
-        return false;
+        return this;
+    }
+    public boolean hasTransition(String url){
+        return url.equals(driver.getCurrentUrl()) && lifetimeMembershipTitle.isDisplayed();
     }
 }
