@@ -7,5 +7,6 @@
     <suite-files>
         <suite-file path="testng-home.xml"/>
         <suite-file path="testng-login.xml"/>
+        <suite-file path="testng-sqlex.xml"/>
     </suite-files>
 </suite>

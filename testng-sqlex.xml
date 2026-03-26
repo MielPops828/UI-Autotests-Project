@@ -1,0 +1,10 @@
+<suite name="SQL-EX Page TestSuite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+    <test name="SQL-EX Page Cookies Tests">
+        <classes>
+            <class name="tests.SQLEXCookieTest"/>
+        </classes>
+    </test>
+</suite>
