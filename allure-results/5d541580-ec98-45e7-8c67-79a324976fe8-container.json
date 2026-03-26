@@ -1,0 +1,1 @@
+{"uuid":"5d541580-ec98-45e7-8c67-79a324976fe8","name":"testValidAuth","children":["97deb80e-1139-4104-bbe5-4f7e78533f25"],"befores":[{"name":"validLoginData","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1774460926146,"stop":1774460926146}],"afters":[],"start":1774460926146,"stop":1774460960498}

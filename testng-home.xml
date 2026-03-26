@@ -8,6 +8,7 @@
             <class name="tests.HomePageLoadTest"/>
             <class name="tests.NavigationMenuTransitionTest"/>
             <class name="tests.StickyHeaderTest"/>
+            <class name="tests.ScreenshotHomePageLoadTest"/>
         </classes>
     </test>
 </suite>
