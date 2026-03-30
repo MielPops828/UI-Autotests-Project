@@ -12,8 +12,13 @@ import utils.LoginDataProvider;
 public class SuccessLogoutTest extends BaseTest{
     @Test(dataProvider = "validLoginData", dataProviderClass = LoginDataProvider.class, description = "Проверка разлогирования после авторизации с валидными данными")
     @Severity(SeverityLevel.NORMAL)
-    public void testSuccessLogout(String login, String password, String username){
-        LoginPage loginPage = new LoginPage(getDriver()).openPage().clearFields().inputData(login, password, username).loginValid().clickLogout();
+    public void testSuccessLogout(String username, String password, String usernameDescription){
+        LoginPage loginPage = new LoginPage(getDriver())
+                .openPage()
+                .clearFields()
+                .inputData(username, password, usernameDescription)
+                .loginValid()
+                .clickLogout();
         Assert.assertTrue(loginPage.isLoginPageOpened());
     }
 }
