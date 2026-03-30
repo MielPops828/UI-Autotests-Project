@@ -17,18 +17,18 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(ParameterProvider.get("wait.time"))));
         PageFactory.initElements(driver, this);
     }
 
     @FindBy(css = "input[name='username']")
-    private WebElement loginField;
+    private WebElement usernameField;
 
     @FindBy(css = "input[name='password']")
     private WebElement passwordField;
 
     @FindBy(xpath = "//input[starts-with(@id, 'formly_')]")
-    private WebElement usernameField;
+    private WebElement usernameDescriptionField;
 
     @FindBy(css = "button.btn.btn-danger")
     private WebElement loginButton;
@@ -42,38 +42,41 @@ public class LoginPage {
         return this;
     }
 
-    @Step("Проверить отображение поля логина и пароля")
+    @Step("Проверить отображение поля имени пользователя и пароля")
     public boolean isFieldsVisible(){
-        return loginField.isDisplayed() && passwordField.isDisplayed() && usernameField.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(usernameField));
+        wait.until(ExpectedConditions.visibilityOf(passwordField));
+        wait.until(ExpectedConditions.visibilityOf(usernameDescriptionField));
+        return usernameField.isDisplayed() && passwordField.isDisplayed() && usernameDescriptionField.isDisplayed();
     }
 
     @Step("Очистить поля ввода")
     public LoginPage clearFields(){
-        wait.until(ExpectedConditions.visibilityOf(loginField));
-        wait.until(ExpectedConditions.visibilityOf(passwordField));
         wait.until(ExpectedConditions.visibilityOf(usernameField));
-        loginField.clear();
-        passwordField.clear();
+        wait.until(ExpectedConditions.visibilityOf(passwordField));
+        wait.until(ExpectedConditions.visibilityOf(usernameDescriptionField));
         usernameField.clear();
+        passwordField.clear();
+        usernameDescriptionField.clear();
         return this;
     }
 
     @Step("Проверить, что кнопка имеет состояние disabled при незаполненных полях")
     public boolean isButtonDisable(){
-        String disabledAttr = loginButton.getAttribute("disabled");
-        return disabledAttr != null && !disabledAttr.isEmpty();
+        return !loginButton.isEnabled();
     }
 
-    @Step("Заполнить поля данными: login: {login}, password: {password}, username: {username}")
-    public LoginPage inputData(String login, String password, String username){
-        loginField.sendKeys(login);
-        passwordField.sendKeys(password);
+    @Step("Заполнить поля данными: username: {username}, password: {password}, username description: {usernameDescription}")
+    public LoginPage inputData(String username, String password, String usernameDescription){
         usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        usernameDescriptionField.sendKeys(usernameDescription);
         return this;
     }
 
     @Step("Нажать на кнопку 'Login' при указанных валидных данных")
     public DashboardPage loginValid(){
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
         return new DashboardPage(driver);
     }
