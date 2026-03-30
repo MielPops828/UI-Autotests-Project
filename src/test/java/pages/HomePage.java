@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -52,11 +53,13 @@ public class HomePage {
     @FindBy(xpath = "//h1[contains(text(), 'LIFETIME MEMBERSHIP CLUB')]")
     private WebElement lifetimeMembershipTitle;
 
+    @Step("Открыть сайт")
     public HomePage openPage(){
         driver.get(ParameterProvider.get("base.url"));
         return this;
     }
 
+    @Step("Проверить отображение элементов на странице")
     public boolean visibilitySections(){
         wait.until(ExpectedConditions.visibilityOf(headerElement));
         wait.until(ExpectedConditions.visibilityOf(navBlock));
@@ -71,6 +74,7 @@ public class HomePage {
         return headerElement.findElements(By.tagName("a"));
     }
 
+    @Step("Проверить хэдер с контактной информацией")
     public boolean areAllLinksHaveHref() {
         List<WebElement> links = getAllLinks();
         for (WebElement link : links) {
@@ -82,30 +86,36 @@ public class HomePage {
         return true;
     }
 
+    @Step("Проверить отображение футера")
     public boolean footerVisibility(){
         return footerElement.isDisplayed();
     }
 
+    @Step("Проверить, что футер содержит {address}")
     public boolean hasAboutContact(String address){
         return aboutSection.getText().trim().contains(address);
     }
 
+    @Step("Проскроллить страницу вниз")
     public HomePage scrollDown(int value) {
         js.executeScript("window.scrollTo({top: " + value + ", behavior: 'smooth'})");
         wait.until(ExpectedConditions.visibilityOf(headerScroll));
         return this;
     }
 
+    @Step("Проверить отображение меню при скроллинге страницы вниз")
     public boolean isHeaderVisible(){
         return headerScroll.isDisplayed();
     }
 
+    @Step("Перейти по меню навигации на другую страницу: {url}")
     public HomePage navigateTransition(){
         allCoursesMenu.click();
         lifetimeMembershipLink.click();
         wait.until(ExpectedConditions.visibilityOf(lifetimeMembershipTitle));
         return this;
     }
+    @Step("Проверить, что произошел переход на {url}")
     public boolean hasTransition(String url){
         return url.equals(driver.getCurrentUrl()) && lifetimeMembershipTitle.isDisplayed();
     }
