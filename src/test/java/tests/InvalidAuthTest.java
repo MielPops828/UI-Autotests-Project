@@ -13,11 +13,11 @@ import utils.ParameterProvider;
 public class InvalidAuthTest extends BaseTest{
     @Test(dataProvider = "invalidLoginData", dataProviderClass = LoginDataProvider.class, description = "Проверка авторизации с невалидными данными")
     @Severity(SeverityLevel.NORMAL)
-    public void testInvalidAuth(String login, String password, String username){
+    public void testInvalidAuth(String username, String password, String usernameDescription){
         LoginPage loginPage = new LoginPage(getDriver())
                 .openPage()
                 .clearFields()
-                .inputData(login, password, username)
+                .inputData(username, password, usernameDescription)
                 .loginInvalid();
         Assert.assertTrue(loginPage.isFailAuth(ParameterProvider.get("fail.message")));
     }

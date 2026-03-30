@@ -19,7 +19,7 @@ public class HomePage {
     public HomePage(WebDriver driver){
         this.driver = driver;
         js = (JavascriptExecutor) this.driver;
-        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(2));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(ParameterProvider.get("wait.time"))));
         PageFactory.initElements(driver, this);
     }
 

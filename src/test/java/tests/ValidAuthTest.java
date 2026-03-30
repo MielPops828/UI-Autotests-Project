@@ -14,8 +14,12 @@ import utils.ParameterProvider;
 public class ValidAuthTest extends BaseTest{
     @Test(dataProvider = "validLoginData", dataProviderClass = LoginDataProvider.class, description = "Проверка авторизации с валидными данными")
     @Severity(SeverityLevel.NORMAL)
-    public void testValidAuth(String login, String password, String username){
-        DashboardPage loginPage = new LoginPage(getDriver()).openPage().clearFields().inputData(login, password, username).loginValid();
+    public void testValidAuth(String username, String password, String usernameDescription){
+        DashboardPage loginPage = new LoginPage(getDriver())
+                .openPage()
+                .clearFields()
+                .inputData(username, password, usernameDescription)
+                .loginValid();
         Assert.assertTrue(loginPage.isSuccessAuth(ParameterProvider.get("success.message")));
     }
 }
