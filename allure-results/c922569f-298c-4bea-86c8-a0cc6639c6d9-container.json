@@ -1,1 +1,0 @@
-{"uuid":"c922569f-298c-4bea-86c8-a0cc6639c6d9","name":"testScreenshot","children":["e1045ddc-4e94-4807-b5f9-97b672bd28c1"],"befores":[{"name":"invalidLoginData","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1774460945311,"stop":1774460945311}],"afters":[],"start":1774460945311,"stop":1774460960486}
