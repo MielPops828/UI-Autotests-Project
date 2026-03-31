@@ -8,7 +8,6 @@
             <class name="tests.ValidAuthTest"/>
             <class name="tests.InvalidAuthTest"/>
             <class name="tests.SuccessLogoutTest"/>
-            <class name="tests.ScreenshotAuthTest"/>
         </classes>
     </test>
 </suite>

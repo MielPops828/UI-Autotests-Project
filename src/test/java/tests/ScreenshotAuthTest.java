@@ -14,12 +14,8 @@ import utils.ParameterProvider;
 public class ScreenshotAuthTest extends BaseTest{
     @Test(dataProvider = "invalidLoginData", dataProviderClass = LoginDataProvider.class, description = "Проверка создания скриншота при падении теста авторизации")
     @Severity(SeverityLevel.NORMAL)
-    public void testScreenshot(String username, String password, String usernameDescription){
-        DashboardPage loginPage = new LoginPage(getDriver())
-                .openPage()
-                .clearFields()
-                .inputData(username, password, usernameDescription)
-                .loginValid();
+    public void testScreenshot(String login, String password, String username){
+        DashboardPage loginPage = new LoginPage(getDriver()).openPage().clearFields().inputData(login, password, username).loginValid();
         Assert.assertTrue(loginPage.isSuccessAuth(ParameterProvider.get("success.message")));
     }
 }

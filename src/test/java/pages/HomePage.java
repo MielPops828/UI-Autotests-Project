@@ -53,7 +53,7 @@ public class HomePage {
     @FindBy(xpath = "//h1[contains(text(), 'LIFETIME MEMBERSHIP CLUB')]")
     private WebElement lifetimeMembershipTitle;
 
-    @Step("Открыть сайт")
+    @Step("Открыть страницу")
     public HomePage openPage(){
         driver.get(ParameterProvider.get("base.url"));
         return this;
