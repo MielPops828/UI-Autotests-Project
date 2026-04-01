@@ -5,6 +5,7 @@
     <test name="SQL-EX Page Cookies Tests">
         <classes>
             <class name="tests.SQLEXCookieTest"/>
+            <class name="tests.SQLEXScrollFocusTest"/>
         </classes>
     </test>
 </suite>
