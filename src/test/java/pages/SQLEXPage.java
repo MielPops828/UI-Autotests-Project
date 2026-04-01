@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,11 +18,13 @@ import java.time.Duration;
 public class SQLEXPage {
     private WebDriver driver;
     private WebDriverWait wait;
+    private JavascriptExecutor js;
     private static final String COOKIE_FILE = ParameterProvider.get("cookie.file.path");
 
     public SQLEXPage (WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(ParameterProvider.get("wait.time"))));
+        js = (JavascriptExecutor) this.driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -86,5 +89,23 @@ public class SQLEXPage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    @Step("Проверить наличие скролла на странице")
+    public boolean hasVerticalScroll(){
+        return (Boolean) js.executeScript("return document.documentElement.scrollHeight > document.documentElement.clientHeight;");
+    }
+
+    @Step("Убрать фокус с поля ввода")
+    public SQLEXPage removeFocus(){
+        wait.until(ExpectedConditions.visibilityOf(loginField));
+        js.executeScript("document.activeElement.blur();");
+        return this;
+    }
+
+    @Step("Проверить, что фокус с поля убрался")
+    public boolean hasNoFocus(){
+        wait.until(ExpectedConditions.visibilityOf(loginField));
+        return (Boolean) js.executeScript("return arguments[0] != document.activeElement;", loginField);
     }
 }
