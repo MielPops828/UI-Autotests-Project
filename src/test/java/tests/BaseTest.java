@@ -9,17 +9,20 @@ import static utils.DriverFactory.createWebdriver;
 
 public class BaseTest {
 
-    private WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     @BeforeMethod
     public void setUp(){
-        driver = createWebdriver(ParameterProvider.get("base.browser"));
+        WebDriver webdriver = createWebdriver(ParameterProvider.get("base.browser"));
+        driver.set(webdriver);
     }
 
     @AfterMethod
     public void tearDown(){
-        driver.quit();
+        driver.get().quit();
     }
 
-    public WebDriver getDriver() { return driver; }
+    public WebDriver getDriver() {
+        return driver.get();
+    }
 }
