@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -17,7 +19,8 @@ public class DriverFactory {
     public enum Browser {
         CHROME,
         FIREFOX,
-        EDGE;
+        EDGE,
+        IE;
 
         public static Browser fromString(String value) {
             return Browser.valueOf(value.toUpperCase());
@@ -47,6 +50,13 @@ public class DriverFactory {
                 WebDriverManager.edgedriver().setup();
                 yield new EdgeDriver();
             }
+            case IE -> {
+                WebDriverManager.iedriver().setup();
+                InternetExplorerOptions opt = new InternetExplorerOptions();
+                opt.ignoreZoomSettings();
+                opt.introduceFlakinessByIgnoringSecurityDomains();
+                yield new InternetExplorerDriver(opt);
+            }
             default -> throw new IllegalArgumentException("Браузер не поддерживается: " + browser);
         };
     }
@@ -66,6 +76,15 @@ public class DriverFactory {
                         new URL(ParameterProvider.get("grid.url")),
                         new EdgeOptions()
                 );
+                case IE -> {
+                    InternetExplorerOptions opt = new InternetExplorerOptions();
+                    opt.ignoreZoomSettings();
+                    opt.introduceFlakinessByIgnoringSecurityDomains();
+                    yield new RemoteWebDriver(
+                            new URL(ParameterProvider.get("grid.url")),
+                            opt
+                    );
+                }
                 default -> throw new IllegalArgumentException("Браузер не поддерживается: " + browser);
             };
         } catch (MalformedURLException e) {

@@ -7,6 +7,7 @@
     </listeners>
     <test name="Home tests">
         <parameter name="suiteName" value="home"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.HomePageLoadTest"/>
             <class name="tests.NavigationMenuTransitionTest"/>
@@ -15,6 +16,7 @@
     </test>
     <test name="Login tests">
         <parameter name="suiteName" value="login"/>
+        <parameter name="browser" value="edge"/>
         <classes>
             <class name="tests.LoginPageLoadTest"/>
             <class name="tests.ValidAuthTest"/>
@@ -24,6 +26,7 @@
     </test>
     <test name="SQL tests">
         <parameter name="suiteName" value="sql"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.SQLEXCookieTest"/>
             <class name="tests.SQLEXScrollFocusTest"/>
