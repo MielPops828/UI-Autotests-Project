@@ -4,6 +4,8 @@ target/
 !**/src/test/**/target/
 .kotlin
 allure-results/
+src/test/java/scripts/selenium-server-4.41.0.jar
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
