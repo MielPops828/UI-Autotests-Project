@@ -3,6 +3,7 @@
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
         <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.RetryListener"/>
     </listeners>
     <test name="Home tests">
         <parameter name="suiteName" value="home"/>
