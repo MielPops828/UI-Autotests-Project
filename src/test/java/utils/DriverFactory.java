@@ -7,17 +7,27 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
-    public static WebDriver createWebdriver(String browser){
-        return switch (browser.toLowerCase()) {
-            case "chrome" -> {
+    public enum Browser {
+        CHROME,
+        FIREFOX,
+        EDGE;
+
+        public static Browser fromString(String value) {
+            return Browser.valueOf(value.toUpperCase());
+        }
+    }
+
+    public static WebDriver createWebdriver(Browser browser){
+        return switch (browser) {
+            case CHROME -> {
                 WebDriverManager.chromedriver().setup();
                 yield new ChromeDriver();
             }
-            case "firefox" -> {
+            case FIREFOX -> {
                 WebDriverManager.firefoxdriver().setup();
                 yield new FirefoxDriver();
             }
-            case "edge" -> {
+            case EDGE -> {
                 WebDriverManager.edgedriver().setup();
                 yield new EdgeDriver();
             }
