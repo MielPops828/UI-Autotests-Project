@@ -43,7 +43,7 @@ public class LoginPage {
     }
 
     @Step("Проверить отображение поля логина и пароля")
-    public boolean isFieldsVisible(){
+    public boolean isLoginFieldsVisible(){
         wait.until(ExpectedConditions.visibilityOf(usernameField));
         wait.until(ExpectedConditions.visibilityOf(passwordField));
         wait.until(ExpectedConditions.visibilityOf(usernameDescriptionField));
@@ -97,6 +97,6 @@ public class LoginPage {
 
     @Step("Проверить возврат к странице авторизации")
     public boolean isLoginPageOpened(){
-        return driver.getCurrentUrl().contains("login") && isFieldsVisible();
+        return driver.getCurrentUrl().contains("login") && isLoginFieldsVisible();
     }
 }
