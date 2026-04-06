@@ -39,4 +39,11 @@
             <class name="tests.DragAndDropTest"/>
         </classes>
     </test>
+    <test name="Tabs tests">
+        <parameter name="suiteName" value="tabs"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.TabsTest"/>
+        </classes>
+    </test>
 </suite>
