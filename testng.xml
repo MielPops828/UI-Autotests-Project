@@ -32,4 +32,11 @@
             <class name="tests.SQLEXScrollFocusTest"/>
         </classes>
     </test>
+    <test name="Drag n Drop tests">
+        <parameter name="suiteName" value="drag n drop"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.DragAndDropTest"/>
+        </classes>
+    </test>
 </suite>
