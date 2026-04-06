@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.DriverFactory;
 import utils.ParameterProvider;
 
 import static utils.DriverFactory.createWebdriver;
@@ -13,7 +14,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp(){
-        driver = createWebdriver(ParameterProvider.get("base.browser"));
+        driver = createWebdriver(DriverFactory.Browser.fromString(ParameterProvider.get("base.browser")));
     }
 
     @AfterMethod

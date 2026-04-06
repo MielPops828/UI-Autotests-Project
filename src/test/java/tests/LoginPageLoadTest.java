@@ -13,7 +13,7 @@ public class LoginPageLoadTest extends BaseTest{
     @Severity(SeverityLevel.BLOCKER)
     public void testLogin(){
         LoginPage loginPage = new LoginPage(getDriver()).openPage().clearFields();
-        Assert.assertTrue(loginPage.isFieldsVisible());
+        Assert.assertTrue(loginPage.isLoginFieldsVisible());
         Assert.assertTrue(loginPage.isButtonDisable());
     }
 }
