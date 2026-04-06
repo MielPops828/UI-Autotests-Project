@@ -53,4 +53,11 @@
             <class name="tests.AlertCustomTextTest"/>
         </classes>
     </test>
+    <test name="Basic Auth tests">
+        <parameter name="suiteName" value="auth"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.BasicAuthTest"/>
+        </classes>
+    </test>
 </suite>

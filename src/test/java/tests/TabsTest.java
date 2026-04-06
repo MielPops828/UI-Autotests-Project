@@ -1,16 +1,18 @@
 package tests;
 
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.FramesAndWindowsPage;
 import utils.ParameterProvider;
 
-public class TabsTest extends BaseTest {
+@Epic("Автоматизация страницы Way2Automation")
+@Feature("Страница Frames and Windows")
+@Story("Проверка открытия новых вкладок")
+public class TabsTest extends BaseTest{
     @Test
     @Severity(SeverityLevel.NORMAL)
-    public void testTabs() {
+    public void testTabs(){
         FramesAndWindowsPage framesAndWindowsPage = new FramesAndWindowsPage(getDriver())
                 .openPage()
                 .switchToFrame()
