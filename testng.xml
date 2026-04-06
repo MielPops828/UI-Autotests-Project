@@ -46,4 +46,11 @@
             <class name="tests.TabsTest"/>
         </classes>
     </test>
+    <test name="Alert tests">
+        <parameter name="suiteName" value="alert"/>
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.AlertCustomTextTest"/>
+        </classes>
+    </test>
 </suite>
